@@ -1,5 +1,5 @@
 package config;
-
+/*
 import java.util.List;
 
 public class ImprimirObject {
@@ -103,4 +103,4 @@ public class ImprimirObject {
     public void setTotalPagar(double totalPagar) {
         this.totalPagar = totalPagar;
     }
-}
+}*/

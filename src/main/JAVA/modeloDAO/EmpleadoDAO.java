@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import modeloDTO.Empleado;
 
+
 public class EmpleadoDAO {
 
     Conexion cn = new Conexion();

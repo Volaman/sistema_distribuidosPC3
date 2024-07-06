@@ -1,24 +1,23 @@
 package controller;
 
+import modeloDTO.Cliente;
+import modeloDAO.ClienteDAO;
+import modeloDTO.Empleado;
+import modeloDAO.EmpleadoDAO;
+import modeloDTO.Producto;
+import modeloDAO.ProductoDAO;
+import modeloDTO.Venta;
+import modeloDAO.VentaDAO;
 import config.GenerarSerie;
-import config.Imprimir;
-import java.awt.Desktop;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import config.SendEmailUsingGMailSMTP;
-import modeloDTO.*;
-import modeloDAO.*;
-
 
 @WebServlet(name = "Controlador", urlPatterns = {"/Controlador"})
 public class Controlador extends HttpServlet {
@@ -50,6 +49,7 @@ public class Controlador extends HttpServlet {
             throws ServletException, IOException {
         String menu = request.getParameter("menu");
         String accion = request.getParameter("accion");
+
         HttpSession session = request.getSession();
         Empleado usuario = (Empleado) session.getAttribute("usuario");
 
@@ -111,7 +111,7 @@ public class Controlador extends HttpServlet {
         if (menu.equals("Cliente")) {
             switch (accion) {
                 case "Listar":
-                    List<Cliente> lista = cdao.listar();
+                    List lista = cdao.listar();
                     request.setAttribute("clientes", lista);
                     break;
                 case "Agregar":
@@ -158,9 +158,8 @@ public class Controlador extends HttpServlet {
         if (menu.equals("Producto")) {
             switch (accion) {
                 case "Listar":
-                    List productos = pdao.listar();
-                    request.setAttribute("productos", productos);
-                    request.getRequestDispatcher("Producto.jsp").forward(request, response);
+                    List lista = pdao.listar();
+                    request.setAttribute("productos", lista);
                     break;
                 case "Agregar":
                     String dni = request.getParameter("txtDni");
@@ -202,7 +201,7 @@ public class Controlador extends HttpServlet {
                     throw new AssertionError();
             }
 
-
+            request.getRequestDispatcher("Producto.jsp").forward(request, response);
         }
         if (menu.equals("NuevaVenta")) {
             switch (accion) {
@@ -212,7 +211,6 @@ public class Controlador extends HttpServlet {
                     c = cdao.buscar(dni);
                     request.setAttribute("c", c);
                     request.setAttribute("nserie", numeroserie);
-                    session.setAttribute("usuario", usuario);
                     request.getRequestDispatcher("RegistrarVenta.jsp").forward(request, response);
                     break;
                 case "BuscarProducto":
@@ -223,7 +221,6 @@ public class Controlador extends HttpServlet {
                     request.setAttribute("lista", lista);
                     request.setAttribute("totalpagar", totalPagar);
                     request.setAttribute("nserie", numeroserie);
-                    session.setAttribute("usuario", usuario);
                     request.getRequestDispatcher("RegistrarVenta.jsp").forward(request, response);
                     break;
                 case "Agregar":
@@ -243,28 +240,12 @@ public class Controlador extends HttpServlet {
                     v.setPrecio(precio);
                     v.setCantidad(cant);
                     v.setSubtotal(subtotal);
-
-                    boolean exist = false;
-                    int count = 0;
-                    int position = 0;
-                    for (Venta venta : lista) {
-                        if (venta.getIdproducto().equals(cod)) {
-                            exist = true;
-                            position = count;
-                        }
-                        count++;
-                    }
-                    if (exist) {
-                        lista.get(position).setCantidad(lista.get(position).getCantidad() + 1);
-                    } else {
-                        lista.add(v);
-                    }
+                    lista.add(v);
                     for (int i = 0; i < lista.size(); i++) {
                         totalPagar = totalPagar + lista.get(i).getSubtotal();
                     }
                     request.setAttribute("totalpagar", totalPagar);
                     request.setAttribute("lista", lista);
-                    session.setAttribute("usuario", usuario);
                     request.getRequestDispatcher("RegistrarVenta.jsp").forward(request, response);
                     break;
                 case "delete":
@@ -293,6 +274,7 @@ public class Controlador extends HttpServlet {
                             for (int i = 0; i < lista.size(); i++) {
                                 if (lista.get(i).getIdproducto().equals(idpc)) {
                                     lista.get(i).setCantidad(canti);
+                                    lista.get(i).setSubtotal(lista.get(i).getCantidad()*lista.get(i).getPrecio());
                                 }
                             }
                         }
@@ -310,7 +292,6 @@ public class Controlador extends HttpServlet {
                     session.setAttribute("usuario", usuario);
                     request.getRequestDispatcher("RegistrarVenta.jsp").forward(request, response);
                     break;
-
                 case "GenerarVenta":
                     //Actualizacion del Stock
                     for (int i = 0; i < lista.size(); i++) {
@@ -329,7 +310,7 @@ public class Controlador extends HttpServlet {
                     v.setFecha("2019-06-14");
                     v.setMonto(totalPagar);
                     v.setEstado("1");
-                    int r = vdao.guardarVenta(v);
+                    vdao.guardarVenta(v);
                     //Guardar Detalle ventas
                     int idv = Integer.parseInt(vdao.IdVentas());
                     for (int i = 0; i < lista.size(); i++) {
@@ -338,18 +319,10 @@ public class Controlador extends HttpServlet {
                         v.setIdproducto(lista.get(i).getIdproducto());
                         v.setCantidad(lista.get(i).getCantidad());
                         v.setPrecio(lista.get(i).getPrecio());
-                        r = vdao.guardarDetalleventas(v);
-                    }
-
-                    Imprimir.imprimirDocumento(lista,numeroserie,c,em);
-                    try {
-                        Desktop.getDesktop().open(new File(numeroserie + ".txt"));
-                    } catch (IOException ex) {
-                        Logger.getLogger(Imprimir.class.getName()).log(Level.SEVERE, null, ex);
+                        vdao.guardarDetalleventas(v);
                     }
                     lista = new ArrayList<>();
-                    request.getRequestDispatcher("Controlador?menu=NuevaVenta&accion=ventanueva").forward(request, response);
-                    System.out.println("Venta Realizada con Éxito..!!!:" + r);
+                    request.getRequestDispatcher("RegistrarVenta.jsp").forward(request, response);
                     break;
                 default:
                     v = new Venta();
@@ -366,39 +339,7 @@ public class Controlador extends HttpServlet {
                         numeroserie = gs.NumeroSerie(incrementar);
                         request.setAttribute("nserie", numeroserie);
                     }
-                    session.setAttribute("usuario", usuario);
                     request.getRequestDispatcher("RegistrarVenta.jsp").forward(request, response);
-            }
-        }
-       if (menu.equals("EnviarCorreo")) {
-            switch (accion) {
-                case "New":
-                    List<Cliente> clientes = cdao.listar();
-                    request.setAttribute("clientes", clientes);
-                    session.setAttribute("clientesSeleted", new ArrayList<Cliente>());
-                    request.getRequestDispatcher("EnviarCorreo.jsp").forward(request, response);
-                    break;
-                case "add":
-                    List<Cliente> getClientes = cdao.listar();
-                    request.setAttribute("clientes", getClientes);
-                    List<Cliente> selected = new ArrayList<>();
-                    for (Cliente c : getClientes) {
-                        String var = request.getParameter("txtSend" + c.getId());
-                        if (var != null && var.equals("on")) {
-                            selected.add(c);
-                        }
-                    }
-                    session.setAttribute("clientesSeleted", selected);
-                    request.setAttribute("clientes", getClientes);
-                    request.getRequestDispatcher("EnviarCorreo.jsp").forward(request, response);
-                    break;
-                case "enviar":
-                    List<Cliente> selectedToSend = (List<Cliente>) session.getAttribute("clientesSeleted");
-                    String asunto = request.getParameter("txtAsunto");
-                    String mensaje = request.getParameter("txtMensaje");
-                    SendEmailUsingGMailSMTP.sendEmail(asunto, mensaje, selectedToSend);
-                    request.getRequestDispatcher("Controlador?menu=EnviarCorreo&accion=New").forward(request, response);
-                    break;
             }
 
         }
@@ -416,7 +357,7 @@ public class Controlador extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-//
+
     @Override
     public String getServletInfo() {
         return "Short description";

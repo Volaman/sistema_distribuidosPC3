@@ -1,5 +1,5 @@
 package config;
-
+/*
 import br.com.adilson.util.Extenso;
 import br.com.adilson.util.PrinterMatrix;
 import java.io.FileInputStream;
@@ -110,3 +110,4 @@ public class Imprimir {
         }
    }
 }
+*/
