@@ -1,7 +1,7 @@
 package controller;
 
 import config.GenerarSerie;
-//import config.Imprimir;
+import config.Imprimir;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
@@ -15,9 +15,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import config.SendEmailUsingGMailSMTP;
 import modeloDTO.*;
 import modeloDAO.*;
-//import sendemail.SendEmailUsingGMailSMTP;
+
 
 @WebServlet(name = "Controlador", urlPatterns = {"/Controlador"})
 public class Controlador extends HttpServlet {
@@ -340,12 +341,12 @@ public class Controlador extends HttpServlet {
                         r = vdao.guardarDetalleventas(v);
                     }
 
-                   // Imprimir.imprimirDocumento(lista,numeroserie,c,em);
-                  //  try {
-                  //      Desktop.getDesktop().open(new File(numeroserie + ".txt"));
-                  //  } catch (IOException ex) {
-                  //      Logger.getLogger(Imprimir.class.getName()).log(Level.SEVERE, null, ex);
-                  //  }
+                    Imprimir.imprimirDocumento(lista,numeroserie,c,em);
+                    try {
+                        Desktop.getDesktop().open(new File(numeroserie + ".txt"));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Imprimir.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     lista = new ArrayList<>();
                     request.getRequestDispatcher("Controlador?menu=NuevaVenta&accion=ventanueva").forward(request, response);
                     System.out.println("Venta Realizada con Éxito..!!!:" + r);
@@ -369,7 +370,7 @@ public class Controlador extends HttpServlet {
                     request.getRequestDispatcher("RegistrarVenta.jsp").forward(request, response);
             }
         }
-      /* if (menu.equals("EnviarCorreo")) {
+       if (menu.equals("EnviarCorreo")) {
             switch (accion) {
                 case "New":
                     List<Cliente> clientes = cdao.listar();
@@ -400,7 +401,7 @@ public class Controlador extends HttpServlet {
                     break;
             }
 
-        }*/
+        }
 
     }
 
