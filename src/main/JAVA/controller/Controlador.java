@@ -1,6 +1,6 @@
 package controller;
 
-//import config.GenerarSerie;
+import config.GenerarSerie;
 //import config.Imprimir;
 import java.awt.Desktop;
 import java.io.File;
@@ -106,7 +106,7 @@ public class Controlador extends HttpServlet {
             }
 
             request.getRequestDispatcher("Empleado.jsp").forward(request, response);
-        }/*
+        }
         if (menu.equals("Cliente")) {
             switch (accion) {
                 case "Listar":
@@ -309,7 +309,7 @@ public class Controlador extends HttpServlet {
                     session.setAttribute("usuario", usuario);
                     request.getRequestDispatcher("RegistrarVenta.jsp").forward(request, response);
                     break;
-/*
+
                 case "GenerarVenta":
                     //Actualizacion del Stock
                     for (int i = 0; i < lista.size(); i++) {
@@ -340,12 +340,12 @@ public class Controlador extends HttpServlet {
                         r = vdao.guardarDetalleventas(v);
                     }
 
-                    Imprimir.imprimirDocumento(lista,numeroserie,c,em);
-                    try {
-                        Desktop.getDesktop().open(new File(numeroserie + ".txt"));
-                    } catch (IOException ex) {
-                        Logger.getLogger(Imprimir.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                   // Imprimir.imprimirDocumento(lista,numeroserie,c,em);
+                  //  try {
+                  //      Desktop.getDesktop().open(new File(numeroserie + ".txt"));
+                  //  } catch (IOException ex) {
+                  //      Logger.getLogger(Imprimir.class.getName()).log(Level.SEVERE, null, ex);
+                  //  }
                     lista = new ArrayList<>();
                     request.getRequestDispatcher("Controlador?menu=NuevaVenta&accion=ventanueva").forward(request, response);
                     System.out.println("Venta Realizada con Éxito..!!!:" + r);
@@ -369,7 +369,7 @@ public class Controlador extends HttpServlet {
                     request.getRequestDispatcher("RegistrarVenta.jsp").forward(request, response);
             }
         }
-       if (menu.equals("EnviarCorreo")) {
+      /* if (menu.equals("EnviarCorreo")) {
             switch (accion) {
                 case "New":
                     List<Cliente> clientes = cdao.listar();

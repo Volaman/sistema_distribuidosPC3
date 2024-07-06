@@ -6,7 +6,6 @@
                 <div class="row text-center">
                     <div class="col-12">
                         <button type="submit" name="accion" value="ventanueva" class="btn btn-lg badge badge-light">
-                            <img src="img/cart.png" alt=""/>
                         </button>
                     </div>
                     <div class="col-12">
@@ -20,7 +19,7 @@
                 <div class="row text-center">
                     <div class="col-12">
                         <button type="submit" value="" class="btn btn-lg badge badge-light">
-                            <img src="img/caja.png" alt=""/>
+
                         </button>
                     </div>
                     <div class="col-12">
