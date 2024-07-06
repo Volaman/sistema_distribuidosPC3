@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+* {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    color:black;
+
+}
+
+.contenedor{
+    width: 25%;
+    margin: 15% auto;
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+    box-shadow: 5px 2px 5px black;
+    border-radius: 20px;
+}
+
+.contenedor .texto{
+    margin: 0;
+    padding: 10px 5px 5px;
+}
+.contenedor .texto h1{
+    text-align: center;
+    font-weight: 400;
+}
+form{
+    padding: 20px 20px 20px;
+}
+.contenedor .contenedorLP{
+    margin: 20px;
+}
+.contenedor form .contenedorLP label{
+    font-size: 17px;
+}
+.contenedor form .contenedorLP input{
+    width: 100%;
+    border-bottom: 2px solid black;
+    margin: 10px;
+    padding:10px 3px;
+    border-radius:5px;
+}
+.contenedor form .contenedorLP-C{
+    padding:10px;
+    display: flex;
+    gap: 70px;
+}
+.contenedor form .contenedorLP-C a{
+    text-decoration: none;
+    font-weight: 400;
+    color: black;
+}
+.contenedor form .contenedorLP input[type="submit"]{
+    background-color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    color:white;
+}
+.contenedor form .contenedorLP input[type="submit"]:hover{
+    transition: 0.2s;
+    background-color: white;
+    color: black;
+}
+.contenedor form .contenedorLP p{
+    display: inline ;
+}
+.contenedor form .contenedorLP a{
+    display: inline;
+    text-decoration: none;
+    font-weight: 400;
+    padding-left: 5dvh;
+}
