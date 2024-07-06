@@ -40,12 +40,13 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+    <!-- https://mvnrepository.com/artifact/com.cedarsoftware/java-util -->
     <dependency>
-      <groupId>javax.mail</groupId>
-      <artifactId>mail</artifactId>
-      <version>1.4</version>
+      <groupId>com.cedarsoftware</groupId>
+      <artifactId>java-util</artifactId>
+      <version>1.8.0</version>
     </dependency>
+
 
 
     <!-- https://mvnrepository.com/artifact/javax.activation/activation -->

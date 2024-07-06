@@ -1,5 +1,5 @@
 package config;
-/*
+
 import br.com.adilson.util.Extenso;
 import br.com.adilson.util.PrinterMatrix;
 import java.io.FileInputStream;
@@ -19,11 +19,7 @@ import modeloDTO.Cliente;
 import modeloDTO.Empleado;
 import modeloDTO.Venta;
 
-/**
- *
- * @author Petuel
- */
-/*
+
 public class Imprimir {
 
     ImprimirObject io = null;
@@ -113,4 +109,4 @@ public class Imprimir {
             System.err.println("No existen impresoras instaladas");
         }
    }
-}*/
+}
