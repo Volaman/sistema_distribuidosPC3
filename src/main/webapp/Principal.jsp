@@ -1,4 +1,5 @@
-
+<%@ include file="commons/header.jspf"%>
+<%@ include file="commons/navigate.jspf"%>
 <div class="container mt-4">
     <div class="form-inline justify-content-center">
         <div class="form-group">
@@ -6,6 +7,7 @@
                 <div class="row text-center">
                     <div class="col-12">
                         <button type="submit" name="accion" value="ventanueva" class="btn btn-lg badge badge-light">
+                            <img src="img/cart.png" alt=""/>
                         </button>
                     </div>
                     <div class="col-12">
@@ -19,7 +21,7 @@
                 <div class="row text-center">
                     <div class="col-12">
                         <button type="submit" value="" class="btn btn-lg badge badge-light">
-
+                            <img src="img/caja.png" alt=""/>
                         </button>
                     </div>
                     <div class="col-12">
@@ -47,6 +49,7 @@
                 <div class="row text-center">
                     <div class="col-12">
                         <button type="submit" value="" class="btn btn-lg badge badge-light">
+                            <img src="img/setting.png" alt=""/>
                         </button>
                     </div>
                     <div class="col-12">
@@ -58,3 +61,4 @@
 
     </div>
 </div>
+<%@ include file="commons/footer.jspf"%>
