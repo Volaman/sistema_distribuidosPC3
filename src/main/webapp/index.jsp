@@ -17,7 +17,7 @@
                 </div>
                 <div class="form-group">
                     <label>Usuario:</label>
-                    <input type="text" name="txtuser" value="emp01" class="form-control">
+                    <input type="text" name="txtuser" value="admin" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Password:</label>
