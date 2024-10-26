@@ -1,4 +1,14 @@
+<%@page import="java.util.List"%>
+<%@page import="modeloDTO.Empleado"%>
+<%@page import="modeloDTO.Cliente"%>
+<%@page import="modeloDTO.Producto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,6 +16,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>JSP Page</title>
 </head>
+
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-info">
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -30,15 +41,14 @@
     </div>
     <div class="dropdown">
         <button style="border: none" class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            ${usuario.getNom()}
-        </button>
+          ${usuario.getNom()}
         <div class="dropdown-menu text-center">
 
             <a class="dropdown-item" href="#">
                 <img src="img/user.png" alt="60" width="60"/>
             </a>
 
-            <a class="dropdown-item" href="#">${usuario.getUser()}</a>
+            <a class="dropdown-item" href="#"> ${usuario.getNom()} </a>
             <a class="dropdown-item" href="#">usuario@gmail.com</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="Validar?accion=Salir">Salir</a>

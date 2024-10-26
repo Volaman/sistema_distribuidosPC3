@@ -17,7 +17,7 @@ public class Fecha {
         fecha = sdf.format(calendar.getTime());
         return fecha;
     }
-
+//adicion prueba
     public static String FechaBD() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         fecha = sdf.format(calendar.getTime());

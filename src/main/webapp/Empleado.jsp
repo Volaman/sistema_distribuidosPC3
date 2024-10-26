@@ -1,9 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.List"%>
-<%@page import="modeloDAO.EmpleadoDAO"%>
-<%@page import="modeloDTO.Empleado"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +27,10 @@
                     </div>
                     <div class="form-group">
                         <label>Estado</label>
-                        <input type="text" value="${empleado.getEstado()}" name="txtEstado" class="form-control">
+                        <select class="form-control" name="txtEstado">
+                            <option value="1">ACTIVO</option>
+                            <option value="0">INACTIVO</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Usuario</label>
@@ -59,7 +58,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="em" items="${emplEeados}">
+                    <c:forEach var="em" items="${empleados}">
                         <tr>
                             <td>${em.getId()}</td>
                             <td>${em.getDni()}</td>
